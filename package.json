@@ -1,0 +1,29 @@
+{
+  "name": "api-pedido-venda",
+  "version": "1.0.0",
+  "description": "Api para aplicativo do Pedido Venda",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathampa0909/api-pedido-venda.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathampa0909/api-pedido-venda/issues"
+  },
+  "homepage": "https://github.com/nathampa0909/api-pedido-venda#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.95.6",
+    "oracledb": "^5.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.8"
+  }
+}
