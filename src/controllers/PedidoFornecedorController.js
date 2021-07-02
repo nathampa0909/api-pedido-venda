@@ -6,7 +6,7 @@ module.exports = {
 
         if (id) {
             const pedido_fornecedor = await connection('TB_ACAD_PEDIDO_FORNECEDOR').select().where('ID_PEDIDO_FORNECEDOR', id);
-            return response.json(pedido_fornecedor);
+            return response.json(pedido_fornecedor[0]);
         }
 
         const pedido_fornecedors = await connection('TB_ACAD_PEDIDO_FORNECEDOR').select();
@@ -25,7 +25,7 @@ module.exports = {
             .then(async () => {
                 const pedido_fornecedor = await connection('TB_ACAD_PEDIDO_FORNECEDOR').select().whereRaw(`id_fornecedor = ${ID_FORNECEDOR} and valor_total = ${VALOR_TOTAL} 
                                                                                      and data_entrada = to_date('${DATA_ENTRADA}', 'dd-mm-yyyy') and id_funcionario = ${ID_FUNCIONARIO}`);
-                return response.json(pedido_fornecedor);
+                return response.json(pedido_fornecedor[0]);
             });
     },
 
@@ -35,7 +35,7 @@ module.exports = {
         const pedido_fornecedor = await connection('TB_ACAD_PEDIDO_FORNECEDOR').select().where('ID_PEDIDO_FORNECEDOR', id);
         await connection('TB_ACAD_PEDIDO_FORNECEDOR').where('ID_PEDIDO_FORNECEDOR', id).delete();
 
-        return response.status(200).json(pedido_fornecedor);
+        return response.status(200).json(pedido_fornecedor[0]);
     },
 
     async update(request, response) {
@@ -54,7 +54,7 @@ module.exports = {
             })
             .then(async () => {
                 const pedido_fornecedor = await connection('TB_ACAD_PEDIDO_FORNECEDOR').select().where('ID_PEDIDO_FORNECEDOR', id);
-                return response.json(pedido_fornecedor);
+                return response.json(pedido_fornecedor[0]);
             });
     },
 };

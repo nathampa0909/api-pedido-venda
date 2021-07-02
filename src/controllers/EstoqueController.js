@@ -6,10 +6,10 @@ module.exports = {
 
         if (id) {
             const estoque = await connection('TB_ACAD_ESTOQUE').select().where('ID_ESTOQUE', id);
-            return response.json(estoque);
+            return response.json(estoque[0]);
         } else if(nome) {
             const estoque = await connection('TB_ACAD_ESTOQUE').select().whereRaw(`LOWER(NOME) LIKE '%${nome.toString().toLowerCase()}%'`);
-            return response.json(estoque);
+            return response.json(estoque[0]);
         }
 
         const estoques = await connection('TB_ACAD_ESTOQUE').select();
@@ -27,7 +27,7 @@ module.exports = {
             })
             .then(async () => {
                 const estoque = await connection('TB_ACAD_ESTOQUE').select().where('ID_ESTOQUE', sequencia.ID_ESTOQUE + 1);
-                return response.json(estoque);
+                return response.json(estoque[0]);
             });
     },
 
@@ -37,7 +37,7 @@ module.exports = {
         const estoque = await connection('TB_ACAD_ESTOQUE').select().where('ID_ESTOQUE', id);
         await connection('TB_ACAD_ESTOQUE').where('ID_ESTOQUE', id).delete();
 
-        return response.status(200).json(estoque);
+        return response.status(200).json(estoque[0]);
     },
 
     async update(request, response) {
@@ -55,7 +55,7 @@ module.exports = {
             })
             .then(async () => {
                 const estoque = await connection('TB_ACAD_ESTOQUE').select().where('ID_ESTOQUE', id);
-                return response.json(estoque);
+                return response.json(estoque[0]);
             });
     },
 };

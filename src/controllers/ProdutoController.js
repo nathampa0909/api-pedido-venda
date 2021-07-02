@@ -6,10 +6,10 @@ module.exports = {
 
         if (id) {
             const produto = await connection('TB_ACAD_PRODUTO').select().where('ID_PRODUTO', id);
-            return response.json(produto);
+            return response.json(produto[0]);
         } else if (nome) {
             const produto = await connection('TB_ACAD_PRODUTO').select().whereRaw(`LOWER(NOME) LIKE '%${nome.toString().toLowerCase()}%'`);
-            return response.json(produto);
+            return response.json(produto[0]);
         }
 
         const produtos = await connection('TB_ACAD_PRODUTO').select();
@@ -29,7 +29,7 @@ module.exports = {
                 const produto = await connection('TB_ACAD_PRODUTO').select().whereRaw(`nome like '${NOME}' and descricao like '${DESCRICAO}' 
                                                                                        and id_fornecedor = ${ID_FORNECEDOR} and valor_venda = ${VALOR_VENDA}
                                                                                        and valor_compra = ${VALOR_COMPRA} and id_categoria = ${ID_CATEGORIA}`);
-                return response.json(produto);
+                return response.json(produto[0]);
             });
     },
 
@@ -39,7 +39,7 @@ module.exports = {
         const produto = await connection('TB_ACAD_PRODUTO').select().where('ID_PRODUTO', id);
         await connection('TB_ACAD_PRODUTO').where('ID_PRODUTO', id).delete();
 
-        return response.status(200).json(produto);
+        return response.status(200).json(produto[0]);
     },
 
     async update(request, response) {
@@ -58,7 +58,7 @@ module.exports = {
             })
             .then(async () => {
                 const produto = await connection('TB_ACAD_PRODUTO').select().where('ID_PRODUTO', id);
-                return response.json(produto);
+                return response.json(produto[0]);
             });
     },
 };

@@ -6,7 +6,7 @@ module.exports = {
 
         if (id) {
             const item_pedido_fornecedor = await connection('TB_ACAD_ITEM_PEDIDO_FORNECEDOR').select().where('ID_ITEM_PEDIDO_FORNECEDOR', id);
-            return response.json(item_pedido_fornecedor);
+            return response.json(item_pedido_fornecedor[0]);
         }
 
         const item_pedido_fornecedors = await connection('TB_ACAD_ITEM_PEDIDO_FORNECEDOR').select();
@@ -26,7 +26,7 @@ module.exports = {
                 const item_pedido_fornecedor = await connection('TB_ACAD_ITEM_PEDIDO_FORNECEDOR')
                                                         .select().whereRaw(`id_produto like ${ID_PRODUTO} and valor_unidade like ${VALOR_UNIDADE} 
                                                         and valor_total like ${VALOR_TOTAL} and quantidade = ${QUANTIDADE} and id_pedido = ${ID_PEDIDO}`);
-                return response.json(item_pedido_fornecedor);
+                return response.json(item_pedido_fornecedor[0]);
             });
     },
 
@@ -36,7 +36,7 @@ module.exports = {
         const item_pedido_fornecedor = await connection('TB_ACAD_ITEM_PEDIDO_FORNECEDOR').select().where('ID_ITEM_PEDIDO_FORNECEDOR', id);
         await connection('TB_ACAD_ITEM_PEDIDO_FORNECEDOR').where('ID_ITEM_PEDIDO_FORNECEDOR', id).delete();
 
-        return response.status(200).json(item_pedido_fornecedor);
+        return response.status(200).json(item_pedido_fornecedor[0]);
     },
 
     async update(request, response) {
@@ -55,7 +55,7 @@ module.exports = {
             })
             .then(async () => {
                 const item_pedido_fornecedor = await connection('TB_ACAD_ITEM_PEDIDO_FORNECEDOR').select().where('ID_ITEM_PEDIDO_FORNECEDOR', id);
-                return response.json(item_pedido_fornecedor);
+                return response.json(item_pedido_fornecedor[0]);
             });
     },
 };

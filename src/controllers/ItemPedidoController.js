@@ -6,7 +6,7 @@ module.exports = {
 
         if (id) {
             const item_pedido = await connection('TB_ACAD_ITEM_PEDIDO').select().where('ID_ITEM_PEDIDO', id);
-            return response.json(item_pedido);
+            return response.json(item_pedido[0]);
         }
 
         const item_pedidos = await connection('TB_ACAD_ITEM_PEDIDO').select();
@@ -26,7 +26,7 @@ module.exports = {
                 const item_pedido = await connection('TB_ACAD_ITEM_PEDIDO').select().whereRaw(`id_pedido = ${ID_PEDIDO} and id_produto = ${ID_PRODUTO} 
                                                                                                and quantidade = ${QUANTIDADE} and valor_unitario = ${VALOR_UNITARIO} 
                                                                                                and valor_total = ${VALOR_TOTAL}`);
-                return response.json(item_pedido);
+                return response.json(item_pedido[0]);
             });
     },
 
@@ -36,7 +36,7 @@ module.exports = {
         const item_pedido = await connection('TB_ACAD_ITEM_PEDIDO').select().where('ID_ITEM_PEDIDO', id);
         await connection('TB_ACAD_ITEM_PEDIDO').where('ID_ITEM_PEDIDO', id).delete();
 
-        return response.status(200).json(item_pedido);
+        return response.status(200).json(item_pedido[0]);
     },
 
     async update(request, response) {
@@ -55,7 +55,7 @@ module.exports = {
             })
             .then(async () => {
                 const item_pedido = await connection('TB_ACAD_ITEM_PEDIDO').select().where('ID_ITEM_PEDIDO', id);
-                return response.json(item_pedido);
+                return response.json(item_pedido[0]);
             });
     },
 };

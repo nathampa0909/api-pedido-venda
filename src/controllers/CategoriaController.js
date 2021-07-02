@@ -6,7 +6,7 @@ module.exports = {
 
         if (id) {
             const categoria = await connection('TB_ACAD_CATEGORIA').select().where('ID_CATEGORIA', id);
-            return response.json(categoria);
+            return response.json(categoria[0]);
         }
 
         const categorias = await connection('TB_ACAD_CATEGORIA').select();
@@ -24,7 +24,7 @@ module.exports = {
             })
             .then(async () => {
                 const categoria = await connection('TB_ACAD_CATEGORIA').select().where('ID_CATEGORIA', sequencia.ID_CATEGORIA + 1);
-                return response.json(categoria);
+                return response.json(categoria[0]);
             });
     },
 
@@ -34,7 +34,7 @@ module.exports = {
         const categoria = await connection('TB_ACAD_CATEGORIA').select().where('ID_CATEGORIA', id);
         await connection('TB_ACAD_CATEGORIA').where('ID_CATEGORIA', id).delete();
 
-        return response.status(200).json(categoria);
+        return response.status(200).json(categoria[0]);
     },
 
     async update(request, response) {
@@ -52,7 +52,7 @@ module.exports = {
             })
             .then(async () => {
                 const categoria = await connection('TB_ACAD_CATEGORIA').select().where('ID_CATEGORIA', id);
-                return response.json(categoria);
+                return response.json(categoria[0]);
             });
     },
 };

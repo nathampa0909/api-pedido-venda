@@ -6,7 +6,7 @@ module.exports = {
 
         if (id) {
             const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().where('ID_FUNCIONARIO', id);
-            return response.json(funcionario);
+            return response.json(funcionario[0]);
         }
 
         const funcionarios = await connection('TB_ACAD_FUNCIONARIO').select();
@@ -25,7 +25,7 @@ module.exports = {
             .then(async () => {
                 const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().whereRaw(`usuario like '${USUARIO}' and senha like '${SENHA}' 
                                                                                                and nome like '${NOME}' and cargo = ${CARGO}`);
-                return response.json(funcionario);
+                return response.json(funcionario[0]);
             });
     },
 
@@ -35,7 +35,7 @@ module.exports = {
         const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().where('ID_FUNCIONARIO', id);
         await connection('TB_ACAD_FUNCIONARIO').where('ID_FUNCIONARIO', id).delete();
 
-        return response.status(200).json(funcionario);
+        return response.status(200).json(funcionario[0]);
     },
 
     async update(request, response) {
@@ -53,7 +53,7 @@ module.exports = {
             })
             .then(async () => {
                 const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().where('ID_FUNCIONARIO', id);
-                return response.json(funcionario);
+                return response.json(funcionario[0]);
             });
     },
 };

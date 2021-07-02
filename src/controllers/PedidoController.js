@@ -6,7 +6,7 @@ module.exports = {
 
         if (id) {
             const pedido = await connection('TB_ACAD_PEDIDO').select().where('ID_PEDIDO', id);
-            return response.json(pedido);
+            return response.json(pedido[0]);
         }
 
         const pedidos = await connection('TB_ACAD_PEDIDO').select();
@@ -27,7 +27,7 @@ module.exports = {
             .then(async () => {
                 const pedido = await connection('TB_ACAD_PEDIDO').select().whereRaw(`id_cliente = ${ID_CLIENTE} and total_pedido = ${TOTAL_PEDIDO} 
                                                                                      and data_pedido = to_date('${DATA_PEDIDO}', 'dd-mm-yyyy') and id_funcionario = ${ID_FUNCIONARIO}`);
-                return response.json(pedido);
+                return response.json(pedido[0]);
             });
     },
 
@@ -37,7 +37,7 @@ module.exports = {
         const pedido = await connection('TB_ACAD_PEDIDO').select().where('ID_PEDIDO', id);
         await connection('TB_ACAD_PEDIDO').where('ID_PEDIDO', id).delete();
 
-        return response.status(200).json(pedido);
+        return response.status(200).json(pedido[0]);
     },
 
     async update(request, response) {
@@ -56,7 +56,7 @@ module.exports = {
             })
             .then(async () => {
                 const pedido = await connection('TB_ACAD_PEDIDO').select().where('ID_PEDIDO', id);
-                return response.json(pedido);
+                return response.json(pedido[0]);
             });
     },
 };

@@ -6,7 +6,7 @@ module.exports = {
 
         if (id) {
             const produto_margem = await connection('TB_ACAD_PRODUTO_MARGEM').select().where('ID_PRODUTO_MARGEM', id);
-            return response.json(produto_margem);
+            return response.json(produto_margem[0]);
         }
 
         const produto_margems = await connection('TB_ACAD_PRODUTO_MARGEM').select();
@@ -24,7 +24,7 @@ module.exports = {
             })
             .then(async () => {
                 const produto_margem = await connection('TB_ACAD_PRODUTO_MARGEM').select().whereRaw(`margem = ${MARGEM} and id_produto = ${ID_PRODUTO}`);
-                return response.json(produto_margem);
+                return response.json(produto_margem[0]);
             });
     },
 
@@ -34,7 +34,7 @@ module.exports = {
         const produto_margem = await connection('TB_ACAD_PRODUTO_MARGEM').select().where('ID_PRODUTO_MARGEM', id);
         await connection('TB_ACAD_PRODUTO_MARGEM').where('ID_PRODUTO_MARGEM', id).delete();
 
-        return response.status(200).json(produto_margem);
+        return response.status(200).json(produto_margem[0]);
     },
 
     async update(request, response) {
@@ -52,7 +52,7 @@ module.exports = {
             })
             .then(async () => {
                 const produto_margem = await connection('TB_ACAD_PRODUTO_MARGEM').select().where('ID_PRODUTO_MARGEM', id);
-                return response.json(produto_margem);
+                return response.json(produto_margem[0]);
             });
     },
 };

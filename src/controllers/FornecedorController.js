@@ -6,10 +6,10 @@ module.exports = {
 
         if (id) {
             const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().where('ID_FORNECEDOR', id);
-            return response.json(fornecedor);
+            return response.json(fornecedor[0]);
         } else if (nome) {
             const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().whereRaw(`LOWER(NOME) LIKE '%${nome.toString().toLowerCase()}%'`);
-            return response.json(fornecedor);
+            return response.json(fornecedor[0]);
         }
 
         const fornecedors = await connection('TB_ACAD_FORNECEDOR').select();
@@ -27,7 +27,7 @@ module.exports = {
             })
             .then(async () => {
                 const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().where('ID_FORNECEDOR', sequencia.ID_FORNECEDOR + 1);
-                return response.json(fornecedor);
+                return response.json(fornecedor[0]);
             });
     },
 
@@ -37,7 +37,7 @@ module.exports = {
         const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().where('ID_FORNECEDOR', id);
         await connection('TB_ACAD_FORNECEDOR').where('ID_FORNECEDOR', id).delete();
 
-        return response.status(200).json(fornecedor);
+        return response.status(200).json(fornecedor[0]);
     },
 
     async update(request, response) {
@@ -55,7 +55,7 @@ module.exports = {
             })
             .then(async () => {
                 const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().where('ID_FORNECEDOR', id);
-                return response.json(fornecedor);
+                return response.json(fornecedor[0]);
             });
     },
 };

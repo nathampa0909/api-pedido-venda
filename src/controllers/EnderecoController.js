@@ -6,13 +6,13 @@ module.exports = {
 
         if (id) {
             const endereco = await connection('TB_ACAD_ENDERECO').select().where('ID_ENDERECO', id);
-            return response.json(endereco);
+            return response.json(endereco[0]);
         } else if(cep) {
             const endereco = await connection('TB_ACAD_ENDERECO').select().where('CEP', cep);
-            return response.json(endereco);
+            return response.json(endereco[0]);
         } else if(fornecedor) {
             const endereco = await connection('TB_ACAD_ENDERECO').select().where('ID_FORNECEDOR', fornecedor);
-            return response.json(endereco);
+            return response.json(endereco[0]);
         }
 
         const enderecos = await connection('TB_ACAD_ENDERECO').select();
@@ -31,7 +31,7 @@ module.exports = {
             })
             .then(async () => {
                 const endereco = await connection('TB_ACAD_ENDERECO').select().where('ID_ENDERECO', sequencia.ID_ENDERECO + 1);
-                return response.json(endereco);
+                return response.json(endereco[0]);
             });
     },
 
@@ -41,7 +41,7 @@ module.exports = {
         const endereco = await connection('TB_ACAD_ENDERECO').select().where('ID_ENDERECO', id);
         await connection('TB_ACAD_ENDERECO').where('ID_ENDERECO', id).delete();
 
-        return response.status(200).json(endereco);
+        return response.status(200).json(endereco[0]);
     },
 
     async update(request, response) {
@@ -60,7 +60,7 @@ module.exports = {
             })
             .then(async () => {
                 const endereco = await connection('TB_ACAD_ENDERECO').select().where('ID_ENDERECO', id);
-                return response.json(endereco);
+                return response.json(endereco[0]);
             });
     },
 };

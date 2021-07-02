@@ -6,7 +6,7 @@ module.exports = {
 
         if (id) {
             const pais = await connection('TB_ACAD_PAIS').select().where('ID_PAIS', id);
-            return response.json(pais);
+            return response.json(pais[0]);
         }
 
         const paiss = await connection('TB_ACAD_PAIS').select();
@@ -24,7 +24,7 @@ module.exports = {
             })
             .then(async () => {
                 const pais = await connection('TB_ACAD_PAIS').select().where('ID_PAIS', sequencia.ID_PAIS + 1);
-                return response.json(pais);
+                return response.json(pais[0]);
             });
     },
 
@@ -34,7 +34,7 @@ module.exports = {
         const pais = await connection('TB_ACAD_PAIS').select().where('ID_PAIS', id);
         await connection('TB_ACAD_PAIS').where('ID_PAIS', id).delete();
 
-        return response.status(200).json(pais);
+        return response.status(200).json(pais[0]);
     },
 
     async update(request, response) {
@@ -52,7 +52,7 @@ module.exports = {
             })
             .then(async () => {
                 const pais = await connection('TB_ACAD_PAIS').select().where('ID_PAIS', id);
-                return response.json(pais);
+                return response.json(pais[0]);
             });
     },
 };

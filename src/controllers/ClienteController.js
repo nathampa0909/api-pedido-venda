@@ -6,10 +6,10 @@ module.exports = {
 
         if (id) {
             const cliente = await connection('TB_ACAD_CLIENTE').select().where('ID_CLIENTE', id);
-            return response.json(cliente);
+            return response.json(cliente[0]);
         } else if (cpf) {
             const cliente = await connection('TB_ACAD_CLIENTE').select().where('CPF_CNPJ', cpf);
-            return response.json(cliente);
+            return response.json(cliente[0]);
         }
 
         const clientes = await connection('TB_ACAD_CLIENTE').select();
@@ -33,7 +33,7 @@ module.exports = {
             })
             .then(async () => {
                 const cliente = await connection('TB_ACAD_CLIENTE').select().where('CPF_CNPJ', CPF_CNPJ);
-                return response.json(cliente);
+                return response.json(cliente[0]);
             });
     },
 
@@ -43,7 +43,7 @@ module.exports = {
         const cliente = await connection('TB_ACAD_CLIENTE').select().where('ID_CLIENTE', id);
         await connection('TB_ACAD_CLIENTE').where('ID_CLIENTE', id).delete();
 
-        return response.status(200).json(cliente);
+        return response.status(200).json(cliente[0]);
     },
 
     async update(request, response) {
@@ -65,7 +65,7 @@ module.exports = {
             })
             .then(async () => {
                 const cliente = await connection('TB_ACAD_CLIENTE').select().where('ID_CLIENTE', id);
-                return response.json(cliente);
+                return response.json(cliente[0]);
             });
     },
 };
