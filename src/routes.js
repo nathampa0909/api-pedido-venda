@@ -18,58 +18,58 @@ const ProdutoMargemController = require('./controllers/ProdutoMargemController.j
 
 const routes = express.Router();
 
-routes.get('/clientes', ClienteController.index);
-routes.get('/clientes/:id', ClienteController.index);
-routes.get('/clientes/cpf/:cpf', ClienteController.index);
-routes.delete('/clientes/:id', ClienteController.delete);
-routes.post('/clientes', ClienteController.create);
-routes.put('/clientes/:id', ClienteController.update);
+routes.get('/cliente', ClienteController.index);
+routes.get('/cliente/:id', ClienteController.index);
+routes.get('/cliente/cpf/:cpf', ClienteController.index);
+routes.delete('/cliente/:id', ClienteController.delete);
+routes.post('/cliente', ClienteController.create);
+routes.put('/cliente/:id', ClienteController.update);
 
-routes.get('/categorias', CategoriaController.index);
-routes.get('/categorias/:id', CategoriaController.index);
-routes.delete('/categorias/:id', CategoriaController.delete);
-routes.post('/categorias', CategoriaController.create);
-routes.put('/categorias/:id', CategoriaController.update);
+routes.get('/categoria', CategoriaController.index);
+routes.get('/categoria/:id', CategoriaController.index);
+routes.delete('/categoria/:id', CategoriaController.delete);
+routes.post('/categoria', CategoriaController.create);
+routes.put('/categoria/:id', CategoriaController.update);
 
-routes.get('/cidades', CidadeController.index);
-routes.get('/cidades/:id', CidadeController.index);
-routes.delete('/cidades/:id', CidadeController.delete);
-routes.post('/cidades', CidadeController.create);
-routes.put('/cidades/:id', CidadeController.update);
+routes.get('/cidade', CidadeController.index);
+routes.get('/cidade/:id', CidadeController.index);
+routes.delete('/cidade/:id', CidadeController.delete);
+routes.post('/cidade', CidadeController.create);
+routes.put('/cidade/:id', CidadeController.update);
 
-routes.get('/enderecos', EnderecoController.index);
-routes.get('/enderecos/:id', EnderecoController.index);
-routes.get('/enderecos/cep/:cep', EnderecoController.index);
-routes.get('/enderecos/fornecedor/:fornecedor', EnderecoController.index);
-routes.delete('/enderecos/:id', EnderecoController.delete);
-routes.post('/enderecos', EnderecoController.create);
-routes.put('/enderecos/:id', EnderecoController.update);
+routes.get('/endereco', EnderecoController.index);
+routes.get('/endereco/:id', EnderecoController.index);
+routes.get('/endereco/cep/:cep', EnderecoController.index);
+routes.get('/endereco/fornecedor/:fornecedor', EnderecoController.index);
+routes.delete('/endereco/:id', EnderecoController.delete);
+routes.post('/endereco', EnderecoController.create);
+routes.put('/endereco/:id', EnderecoController.update);
 
-routes.get('/estados', EstadoController.index);
-routes.get('/estados/:id', EstadoController.index);
-routes.delete('/estados/:id', EstadoController.delete);
-routes.post('/estados', EstadoController.create);
-routes.put('/estados/:id', EstadoController.update);
+routes.get('/estado', EstadoController.index);
+routes.get('/estado/:id', EstadoController.index);
+routes.delete('/estado/:id', EstadoController.delete);
+routes.post('/estado', EstadoController.create);
+routes.put('/estado/:id', EstadoController.update);
 
-routes.get('/estoques', EstoqueController.index);
-routes.get('/estoques/:id', EstoqueController.index);
-routes.get('/estoques/nome/:nome', EstoqueController.index);
-routes.delete('/estoques/:id', EstoqueController.delete);
-routes.post('/estoques', EstoqueController.create);
-routes.put('/estoques/:id', EstoqueController.update);
+routes.get('/estoque', EstoqueController.index);
+routes.get('/estoque/:id', EstoqueController.index);
+routes.get('/estoque/nome/:nome', EstoqueController.index);
+routes.delete('/estoque/:id', EstoqueController.delete);
+routes.post('/estoque', EstoqueController.create);
+routes.put('/estoque/:id', EstoqueController.update);
 
-routes.get('/fornecedores', FornecedorController.index);
-routes.get('/fornecedores/:id', FornecedorController.index);
-routes.get('/fornecedores/nome/:nome', FornecedorController.index);
-routes.delete('/fornecedores/:id', FornecedorController.delete);
-routes.post('/fornecedores', FornecedorController.create);
-routes.put('/fornecedores/:id', FornecedorController.update);
+routes.get('/fornecedore', FornecedorController.index);
+routes.get('/fornecedore/:id', FornecedorController.index);
+routes.get('/fornecedore/nome/:nome', FornecedorController.index);
+routes.delete('/fornecedore/:id', FornecedorController.delete);
+routes.post('/fornecedore', FornecedorController.create);
+routes.put('/fornecedore/:id', FornecedorController.update);
 
-routes.get('/funcionarios', FuncionarioController.index);
-routes.get('/funcionarios/:id', FuncionarioController.index);
-routes.delete('/funcionarios/:id', FuncionarioController.delete);
-routes.post('/funcionarios', FuncionarioController.create);
-routes.put('/funcionarios/:id', FuncionarioController.update);
+routes.get('/funcionario', FuncionarioController.index);
+routes.get('/funcionario/:id', FuncionarioController.index);
+routes.delete('/funcionario/:id', FuncionarioController.delete);
+routes.post('/funcionario', FuncionarioController.create);
+routes.put('/funcionario/:id', FuncionarioController.update);
 
 routes.get('/item-pedido', ItemPedidoController.index);
 routes.get('/item-pedido/:id', ItemPedidoController.index);
