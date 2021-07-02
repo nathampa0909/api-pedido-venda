@@ -15,7 +15,6 @@ module.exports = {
 
     async create(request, response) {
         const { NOME, ID_ESTADO } = request.body;
-        const sequencia = await connection('TB_ACAD_CIDADE').select('ID_CIDADE').orderBy('ID_CIDADE', 'desc').first();
 
         await connection
             .raw(`insert into TB_ACAD_CIDADE (id_estado, nome) values (${ID_ESTADO}, '${NOME}')`)
@@ -23,7 +22,8 @@ module.exports = {
                 return response.status(400).json(error.toString());
             })
             .then(async () => {
-                const cidade = await connection('TB_ACAD_CIDADE').select().where('ID_CIDADE', sequencia.ID_CIDADE + 1);
+                const cidade = await connection('TB_ACAD_FORNECEDOR').select().whereRaw(`id_estado = '${ID_ESTADO}' and nome like '${NOME}'`);
+                
                 return response.json(cidade[0]);
             });
     },

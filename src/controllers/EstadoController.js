@@ -15,7 +15,6 @@ module.exports = {
 
     async create(request, response) {
         const { NOME, ID_PAIS } = request.body;
-        const sequencia = await connection('TB_ACAD_ESTADO').select('ID_ESTADO').orderBy('ID_ESTADO', 'desc').first();
 
         await connection
             .raw(`insert into TB_ACAD_ESTADO (id_pais, nome) values (${ID_PAIS}, '${NOME}')`)
@@ -23,7 +22,7 @@ module.exports = {
                 return response.status(400).json(error.toString());
             })
             .then(async () => {
-                const estado = await connection('TB_ACAD_ESTADO').select().where('ID_ESTADO', sequencia.ID_ESTADO + 1);
+                const estado = await connection('TB_ACAD_ESTADO').select().whereRaw(`id_pais = ${ID_PAIS} and nome like '${NOME}'`);
                 return response.json(estado[0]);
             });
     },

@@ -21,7 +21,6 @@ module.exports = {
 
     async create(request, response) {
         const { ID_FORNECEDOR, ID_PAIS, LOGRADOURO, NUMERO, BAIRRO, ID_CIDADE, CEP, ID_ESTADO } = request.body;
-        const sequencia = await connection('TB_ACAD_ENDERECO').select('ID_ENDERECO').orderBy('ID_ENDERECO', 'desc').first();
 
         await connection
             .raw(`insert into TB_ACAD_ENDERECO (id_fornecedor, id_pais, logradouro, numero, bairro, id_cidade, cep, id_estado) values (${ID_FORNECEDOR}, ${ID_PAIS}, 
@@ -30,7 +29,10 @@ module.exports = {
                 return response.status(400).json(error.toString());
             })
             .then(async () => {
-                const endereco = await connection('TB_ACAD_ENDERECO').select().where('ID_ENDERECO', sequencia.ID_ENDERECO + 1);
+                const endereco = await connection('TB_ACAD_FORNECEDOR').select().whereRaw(`id_fornecedor = '${ID_FORNECEDOR}' and id_pais = '${ID_PAIS}' 
+                                                                                       and lograduro like '${LOGRADOURO}' and numero = ${NUMERO} 
+                                                                                       and bairro like '${BAIRRO} and id_cidade = ${ID_CIDADE} and cep = ${CEP}
+                                                                                       and id_estado = ${ID_ESTADO}`);
                 return response.json(endereco[0]);
             });
     },

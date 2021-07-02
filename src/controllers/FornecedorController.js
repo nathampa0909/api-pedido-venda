@@ -18,15 +18,15 @@ module.exports = {
 
     async create(request, response) {
         const { NOME, CPF_CNPJ, TELEFONE, EMAIL } = request.body;
-        const sequencia = await connection('TB_ACAD_FORNECEDOR').select('ID_FORNECEDOR').orderBy('ID_FORNECEDOR', 'desc').first();
-
+        
         await connection
             .raw(`insert into TB_ACAD_FORNECEDOR (nome, cpf_cnpj, telefone, email) values ('${NOME}', ${CPF_CNPJ}, ${TELEFONE}, '${EMAIL}')`)
             .catch((error) => {
                 return response.status(400).json(error.toString());
             })
             .then(async () => {
-                const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().where('ID_FORNECEDOR', sequencia.ID_FORNECEDOR + 1);
+                const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().whereRaw(`nome like '${NOME}' and cpf_cnpj = '${CPF_CNPJ}' 
+                                                                                       and telefone = ${TELEFONE} and email = '${EMAIL}'`);
                 return response.json(fornecedor[0]);
             });
     },
