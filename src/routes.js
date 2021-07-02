@@ -40,6 +40,7 @@ routes.put('/cidades/:id', CidadeController.update);
 routes.get('/enderecos', EnderecoController.index);
 routes.get('/enderecos/:id', EnderecoController.index);
 routes.get('/enderecos/cep/:cep', EnderecoController.index);
+routes.get('/enderecos/fornecedor/:fornecedor', EnderecoController.index);
 routes.delete('/enderecos/:id', EnderecoController.delete);
 routes.post('/enderecos', EnderecoController.create);
 routes.put('/enderecos/:id', EnderecoController.update);

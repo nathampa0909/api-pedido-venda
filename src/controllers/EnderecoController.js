@@ -2,13 +2,16 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(request, response) {
-        const { id, cep } = request.params;
+        const { id, cep, fornecedor } = request.params;
 
         if (id) {
             const endereco = await connection('TB_ACAD_ENDERECO').select().where('ID_ENDERECO', id);
             return response.json(endereco);
-        } else if(cep){
+        } else if(cep) {
             const endereco = await connection('TB_ACAD_ENDERECO').select().where('CEP', cep);
+            return response.json(endereco);
+        } else if(fornecedor) {
+            const endereco = await connection('TB_ACAD_ENDERECO').select().where('ID_FORNECEDOR', fornecedor);
             return response.json(endereco);
         }
 
