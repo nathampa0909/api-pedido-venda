@@ -22,7 +22,7 @@ module.exports = {
                 return response.status(400).json(error.toString());
             })
             .then(async () => {
-                const cidade = await connection('TB_ACAD_FORNECEDOR').select().whereRaw(`id_estado = '${ID_ESTADO}' and nome like '${NOME}'`);
+                const cidade = await connection('TB_ACAD_CIDADE').select().whereRaw(`id_estado = ${ID_ESTADO} and nome like '${NOME}'`);
                 
                 return response.json(cidade[0]);
             });
