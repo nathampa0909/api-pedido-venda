@@ -58,12 +58,12 @@ routes.delete('/estoque/:id', EstoqueController.delete);
 routes.post('/estoque', EstoqueController.create);
 routes.put('/estoque/:id', EstoqueController.update);
 
-routes.get('/fornecedore', FornecedorController.index);
-routes.get('/fornecedore/:id', FornecedorController.index);
-routes.get('/fornecedore/nome/:nome', FornecedorController.index);
-routes.delete('/fornecedore/:id', FornecedorController.delete);
-routes.post('/fornecedore', FornecedorController.create);
-routes.put('/fornecedore/:id', FornecedorController.update);
+routes.get('/fornecedor', FornecedorController.index);
+routes.get('/fornecedor/:id', FornecedorController.index);
+routes.get('/fornecedor/nome/:nome', FornecedorController.index);
+routes.delete('/fornecedor/:id', FornecedorController.delete);
+routes.post('/fornecedor', FornecedorController.create);
+routes.put('/fornecedor/:id', FornecedorController.update);
 
 routes.get('/funcionario', FuncionarioController.index);
 routes.get('/funcionario/:id', FuncionarioController.index);
