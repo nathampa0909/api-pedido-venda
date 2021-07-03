@@ -2,13 +2,16 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(request, response) {
-        const { id, nome } = request.params;
+        const { id, nome, cpfCnpj } = request.params;
 
         if (id) {
             const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().where('ID_FORNECEDOR', id);
             return response.json(fornecedor[0]);
         } else if (nome) {
             const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().whereRaw(`LOWER(NOME) LIKE '%${nome.toString().toLowerCase()}%'`);
+            return response.json(fornecedor[0]);
+        } else if (cpfCnpj) {
+            const fornecedor = await connection('TB_ACAD_FORNECEDOR').select().whereRaw(`CPF_CNPJ = ${cpfCnpj}`);
             return response.json(fornecedor[0]);
         }
 

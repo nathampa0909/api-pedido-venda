@@ -61,6 +61,7 @@ routes.put('/estoque/:id', EstoqueController.update);
 routes.get('/fornecedor', FornecedorController.index);
 routes.get('/fornecedor/:id', FornecedorController.index);
 routes.get('/fornecedor/nome/:nome', FornecedorController.index);
+routes.get('/fornecedor/cpfCnpj/:cpfCnpj', FornecedorController.index);
 routes.delete('/fornecedor/:id', FornecedorController.delete);
 routes.post('/fornecedor', FornecedorController.create);
 routes.put('/fornecedor/:id', FornecedorController.update);
