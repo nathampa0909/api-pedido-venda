@@ -12,7 +12,7 @@ module.exports = {
             return response.json(estoque[0]);
         } else if(produto) {
             const estoque = await connection('TB_ACAD_ESTOQUE').select().whereRaw(`id_produto = ${produto}`);
-            return response.json(estoque[0]);
+            return response.json(estoque);
         }
 
         const estoques = await connection('TB_ACAD_ESTOQUE').select();
