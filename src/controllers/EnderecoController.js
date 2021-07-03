@@ -29,9 +29,9 @@ module.exports = {
                 return response.status(400).json(error.toString());
             })
             .then(async () => {
-                const endereco = await connection('TB_ACAD_ENDERECO').select().whereRaw(`id_fornecedor = '${ID_FORNECEDOR}' and id_pais = '${ID_PAIS}' 
+                const endereco = await connection('TB_ACAD_ENDERECO').select().whereRaw(`id_fornecedor = ${ID_FORNECEDOR} and id_pais = ${ID_PAIS} 
                                                                                        and logradouro like '${LOGRADOURO}' and numero = ${NUMERO} 
-                                                                                       and bairro like '${BAIRRO}' and id_cidade = ${ID_CIDADE} and cep = ${CEP}
+                                                                                       and bairro like '${BAIRRO}' and id_cidade = ${ID_CIDADE} and cep = ${CEP} 
                                                                                        and id_estado = ${ID_ESTADO}`);
                 return response.json(endereco[0]);
             });
