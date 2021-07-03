@@ -2,13 +2,16 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(request, response) {
-        const { id, nome } = request.params;
+        const { id, nome, produto } = request.params;
 
         if (id) {
             const estoque = await connection('TB_ACAD_ESTOQUE').select().where('ID_ESTOQUE', id);
             return response.json(estoque[0]);
         } else if(nome) {
             const estoque = await connection('TB_ACAD_ESTOQUE').select().whereRaw(`LOWER(NOME) LIKE '%${nome.toString().toLowerCase()}%'`);
+            return response.json(estoque[0]);
+        } else if(produto) {
+            const estoque = await connection('TB_ACAD_ESTOQUE').select().whereRaw(`id_produto = ${produto}`);
             return response.json(estoque[0]);
         }
 

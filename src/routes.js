@@ -54,6 +54,7 @@ routes.put('/estado/:id', EstadoController.update);
 routes.get('/estoque', EstoqueController.index);
 routes.get('/estoque/:id', EstoqueController.index);
 routes.get('/estoque/nome/:nome', EstoqueController.index);
+routes.get('/estoque/produto/:produto', EstoqueController.index);
 routes.delete('/estoque/:id', EstoqueController.delete);
 routes.post('/estoque', EstoqueController.create);
 routes.put('/estoque/:id', EstoqueController.update);
