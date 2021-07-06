@@ -69,6 +69,7 @@ routes.put('/fornecedor/:id', FornecedorController.update);
 
 routes.get('/funcionario', FuncionarioController.index);
 routes.get('/funcionario/:id', FuncionarioController.index);
+routes.get('/funcionario/usuario/:usuario/senha/:senha', FuncionarioController.index);
 routes.delete('/funcionario/:id', FuncionarioController.delete);
 routes.post('/funcionario', FuncionarioController.create);
 routes.put('/funcionario/:id', FuncionarioController.update);

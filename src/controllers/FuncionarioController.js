@@ -2,10 +2,13 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(request, response) {
-        const { id } = request.params;
+        const { id, usuario, senha } = request.params;
 
         if (id) {
             const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().where('ID_FUNCIONARIO', id);
+            return response.json(funcionario[0]);
+        } else if(usuario && senha) {
+            const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().whereRaw(`usuario like '${USUARIO}' and senha like '${SENHA}'`)
             return response.json(funcionario[0]);
         }
 
