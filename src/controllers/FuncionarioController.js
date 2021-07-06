@@ -8,7 +8,7 @@ module.exports = {
             const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().where('ID_FUNCIONARIO', id);
             return response.json(funcionario[0]);
         } else if(usuario && senha) {
-            const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().whereRaw(`usuario like '${USUARIO}' and senha like '${SENHA}'`)
+            const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().whereRaw(`usuario like '${usuario}' and senha like '${senha}'`)
             return response.json(funcionario[0]);
         }
 
