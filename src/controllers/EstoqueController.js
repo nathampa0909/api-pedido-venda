@@ -2,12 +2,9 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(request, response) {
-        const { id, nome, produtos } = request.params;
+        const { id, nome, produto } = request.params;
 
-        if(id && produtos) {
-            const produtos = await connection('TB_ACAD_MOVIMENTACAO_ESTOQUE').select().whereRaw(`id_estoque = ${id}`);
-            return response.json(produtos);
-        } else if (id) {
+        if (id) {
             const estoque = await connection('TB_ACAD_ESTOQUE').select().where('ID_ESTOQUE', id);
             return response.json(estoque[0]);
         } else if(nome) {
@@ -20,16 +17,20 @@ module.exports = {
     },
 
     async create(request, response) {
-        const { NOME, ID_PRODUTO, QUANTIDADE } = request.body;
-        const sequencia = await connection('TB_ACAD_ESTOQUE').select('ID_ESTOQUE').orderBy('ID_ESTOQUE', 'desc').first();
+        const { NOME } = request.body;
+        const existe = (await connection('TB_ACAD_ESTOQUE').select().whereRaw(`LOWER(NOME) like '${NOME.toLowerCase()}'`)) != null;
+
+        if(existe) {
+            return response.status();
+        }
 
         await connection
-            .raw(`insert into TB_ACAD_ESTOQUE (id_produto, quantidade, nome) values (${ID_PRODUTO}, ${QUANTIDADE}, '${NOME}')`)
+            .raw(`insert into TB_ACAD_ESTOQUE (nome) values ('${NOME}')`)
             .catch((error) => {
                 return response.status(400).json(error.toString());
             })
             .then(async () => {
-                const estoque = await connection('TB_ACAD_ESTOQUE').select().where('ID_ESTOQUE', sequencia.ID_ESTOQUE + 1);
+                const estoque = await connection('TB_ACAD_ESTOQUE').select().whereRaw(`NOME like '${NOME}'`);
                 return response.json(estoque[0]);
             });
     },

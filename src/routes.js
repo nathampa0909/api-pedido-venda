@@ -6,6 +6,7 @@ const CidadeController = require('./controllers/CidadeController.js');
 const EnderecoController = require('./controllers/EnderecoController.js');
 const EstadoController = require('./controllers/EstadoController.js');
 const EstoqueController = require('./controllers/EstoqueController.js');
+const EstoqueMovimentacaoController = require('./controllers/EstoqueMovimentacaoController.js');
 const FornecedorController = require('./controllers/FornecedorController.js');
 const FuncionarioController = require('./controllers/FuncionarioController.js');
 const ItemPedidoController = require('./controllers/ItemPedidoController.js');
@@ -54,10 +55,17 @@ routes.put('/estado/:id', EstadoController.update);
 routes.get('/estoque', EstoqueController.index);
 routes.get('/estoque/:id', EstoqueController.index);
 routes.get('/estoque/nome/:nome', EstoqueController.index);
-routes.get('/estoque/:id/:produtos', EstoqueController.index);
 routes.delete('/estoque/:id', EstoqueController.delete);
 routes.post('/estoque', EstoqueController.create);
 routes.put('/estoque/:id', EstoqueController.update);
+
+routes.get('/estoquemv', EstoqueMovimentacaoController.index);
+routes.get('/estoquemv/:id', EstoqueMovimentacaoController.index);
+routes.get('/estoquemv/estoque/:idEstoque', EstoqueMovimentacaoController.index);
+routes.get('/estoquemv/produto/:idProduto', EstoqueMovimentacaoController.index);
+routes.delete('/estoquemv/:id', EstoqueMovimentacaoController.delete);
+routes.post('/estoquemv', EstoqueMovimentacaoController.create);
+routes.put('/estoquemv/:id', EstoqueMovimentacaoController.update);
 
 routes.get('/fornecedor', FornecedorController.index);
 routes.get('/fornecedor/:id', FornecedorController.index);
