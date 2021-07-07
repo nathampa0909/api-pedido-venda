@@ -11,7 +11,7 @@ module.exports = {
             const estoqueMovimentacoes = await connection('TB_ACAD_MOVIMENTACAO_ESTOQUE').select().whereRaw(`id_estoque = ${idEstoque}`);
             return response.json(estoqueMovimentacoes);
         } else if (idProduto) {
-            const estoqueMovimentacoes = await connection('TB_ACAD_MOVIMENTACAO_ESTOQUE').select().whereRaw(`id_produto = ${idEstoque}`);
+            const estoqueMovimentacoes = await connection('TB_ACAD_MOVIMENTACAO_ESTOQUE').select().whereRaw(`id_produto = ${idProduto}`);
             return response.json(estoqueMovimentacoes);
         }
 
