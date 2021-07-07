@@ -41,7 +41,7 @@ module.exports = {
 
     async update(request, response) {
         const { id } = request.params;
-        const { NOME, ID_PRODUTO, QUANTIDADE } = request.body;
+        const { NOME } = request.body;
         const estoqueExiste = Object.keys(await connection('TB_ACAD_ESTOQUE').select().where('ID_ESTOQUE', id)).length == 0;
 
         if (estoqueExiste) {
