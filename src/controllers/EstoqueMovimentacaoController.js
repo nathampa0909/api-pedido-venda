@@ -2,7 +2,7 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(request, response) {
-        const { id, idEstoque } = request.params;
+        const { id, idEstoque, idProduto } = request.params;
 
         if (id) {
             const produtos = await connection('TB_ACAD_MOVIMENTACAO_ESTOQUE').select().whereRaw(`id_movimentacao = ${id}`);
