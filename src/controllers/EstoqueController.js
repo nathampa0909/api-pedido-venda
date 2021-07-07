@@ -18,12 +18,7 @@ module.exports = {
 
     async create(request, response) {
         const { NOME } = request.body;
-        const existe = (await connection('TB_ACAD_ESTOQUE').select().whereRaw(`LOWER(NOME) like '${NOME.toLowerCase()}'`)) != null;
-
-        if(existe) {
-            return response.status();
-        }
-
+        
         await connection
             .raw(`insert into TB_ACAD_ESTOQUE (nome) values ('${NOME}')`)
             .catch((error) => {
@@ -53,7 +48,7 @@ module.exports = {
             return response.status(400).json({ error: "Estoque não existe!" });
         }
 
-        await connection.raw(`update TB_ACAD_ESTOQUE set nome = '${NOME}', id_produto = ${ID_PRODUTO}, quantidade = ${QUANTIDADE} where id_estoque = ${id}`)
+        await connection.raw(`update TB_ACAD_ESTOQUE set nome = '${NOME}' where id_estoque = ${id}`)
             .catch((error) => {
                 return response.status(400).json(error.toString());
             })
