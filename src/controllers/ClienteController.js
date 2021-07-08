@@ -9,6 +9,11 @@ module.exports = {
             return response.json(cliente[0]);
         } else if (cpf) {
             const cliente = await connection('TB_ACAD_CLIENTE').select().where('CPF_CNPJ', cpf);
+
+            if(!cliente[0]) {
+                return response.status(404).json({"error": "404 - Não encontrado"});
+            }
+
             return response.json(cliente[0]);
         }
 
