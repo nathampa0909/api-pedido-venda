@@ -9,6 +9,11 @@ module.exports = {
             return response.json(funcionario[0]);
         } else if(usuario && senha) {
             const funcionario = await connection('TB_ACAD_FUNCIONARIO').select().whereRaw(`usuario like '${usuario}' and senha like '${senha}'`)
+
+            if(!funcionario[0]) {
+                return response.status(404).json({"error": "404 - Não encontrado"});
+            }
+
             return response.json(funcionario[0]);
         }
 
