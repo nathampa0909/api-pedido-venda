@@ -53,7 +53,26 @@ module.exports = {
             return response.status(400).json({ error: "Estoque não existe!" });
         }
 
-        await connection.raw(`update TB_ACAD_MOVIMENTACAO_ESTOQUE set id_estoque = ${ID_ESTOQUE}, id_produto = ${ID_PRODUTO}, quantidade = ${QUANTIDADE} where id_movimentacao = ${id}`)
+        await connection.raw(`update TB_ACAD_MOVIMENTACAO_ESTOQUE set quantidade = ${QUANTIDADE} where id_movimentacao = ${id}`)
+            .catch((error) => {
+                return response.status(400).json(error.toString());
+            })
+            .then(async () => {
+                const estoque = await connection('TB_ACAD_MOVIMENTACAO_ESTOQUE').select().where('ID_MOVIMENTACAO', id);
+                return response.json(estoque[0]);
+            });
+    },
+
+    async updateByIdProdutoEstoque(request, response) {
+        const { idEstoque, idProduto } = request.params;
+        const { QUANTIDADE } = request.body;
+        const estoqueExiste = Object.keys(await connection('TB_ACAD_MOVIMENTACAO_ESTOQUE').select().where('ID_MOVIMENTACAO', id)).length == 0;
+
+        if (estoqueExiste) {
+            return response.status(400).json({ error: "Estoque não existe!" });
+        }
+
+        await connection.raw(`update TB_ACAD_MOVIMENTACAO_ESTOQUE set quantidade = ${QUANTIDADE} where id_estoque = ${idEstoque} and id_produto = ${idProduto}`)
             .catch((error) => {
                 return response.status(400).json(error.toString());
             })

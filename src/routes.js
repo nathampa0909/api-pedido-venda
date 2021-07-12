@@ -66,6 +66,7 @@ routes.get('/estoquemv/produto/:idProduto', EstoqueMovimentacaoController.index)
 routes.delete('/estoquemv/:id', EstoqueMovimentacaoController.delete);
 routes.post('/estoquemv', EstoqueMovimentacaoController.create);
 routes.put('/estoquemv/:id', EstoqueMovimentacaoController.update);
+routes.put('/estoquemv/estoque/:idEstoque/produto/:idProduto', EstoqueMovimentacaoController.updateByIdProdutoEstoque);
 
 routes.get('/fornecedor', FornecedorController.index);
 routes.get('/fornecedor/:id', FornecedorController.index);
